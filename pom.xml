@@ -40,8 +40,15 @@
    <dependency>
      <groupId>org.springframework.data</groupId>
      <artifactId>spring-data-jpa</artifactId>
-     <version>2.1.10.RELEASE</version>
+     
    </dependency>
+   <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.33</version>
+</dependency>
+
  </dependencies>
 
 	<build>
@@ -61,4 +68,21 @@
 		</plugins>
 	</build>
 
+
+
+	<dependencyManagement>
+	
+
+		<dependencies>
+		
+
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>3.2.2</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
 </project>
