@@ -12,8 +12,9 @@ public class MessageService {
     MessageRepository messageRepository;
 
  
+    @SuppressWarnings({ "null", "unchecked" })
     public void saveMessage(Message message){
-        messageRepository.save(message);
+        messageRepository.saveAll((Iterable<Message>) message);
      }
 }
 
