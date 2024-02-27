@@ -8,6 +8,8 @@ import com.battle.chat.demo.model.Message;
 
 import com.battle.chat.demo.repository.MessageRepository;
 
+import jakarta.persistence.Id;
+
 @Service
 public class MessageService {
     @Autowired
@@ -20,10 +22,13 @@ public class MessageService {
     public List<Message> getAllMessages() {
         return (List<Message>) messageRepository.findAll();
     }
-    public void updateMessage(Message oldMessage, Message replacementMessage) {
-        // messageRepository.save(
-        //     messageRepository.findById(oldMessage.getId())
-        // );
-        // toReplace
+
+    public void deleteMessage(Id messageId){
+        System.out.printf("message id to delete------->", messageId);
+
+        if(messageId != null){
+
+            messageRepository.deleteById(messageId);
+        }
     }
 }
