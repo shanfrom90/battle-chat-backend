@@ -20,4 +20,10 @@ public class MessageService {
     public List<Message> getAllMessages() {
         return (List<Message>) messageRepository.findAll();
     }
+    public void updateMessage(Message oldMessage, Message replacementMessage) {
+        // messageRepository.save(
+        //     messageRepository.findById(oldMessage.getId())
+        // );
+        // toReplace
+    }
 }
