@@ -17,7 +17,18 @@ public class MessageService {
     public void saveMessage(Message message) {
         messageRepository.save(message);
     }
+
     public List<Message> getAllMessages() {
         return (List<Message>) messageRepository.findAll();
     }
+
+    @SuppressWarnings("null")
+    public void deleteMessage( Long messageId) {
+        messageRepository.deleteById(messageId);
+    }
+
+    public void deleteAllMessages() {
+        messageRepository.deleteAll();
+    }
+
 }
