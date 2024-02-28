@@ -39,4 +39,10 @@ public class MessageController {
         return "Deleted message with ID:" + messageId;
     }
 
+    @DeleteMapping("/deleteAllMessages")
+    public String deleteAllMessages(){
+        messageService.deleteAllMessages();
+         return "Deleted all messages";
+    }
+
 }
