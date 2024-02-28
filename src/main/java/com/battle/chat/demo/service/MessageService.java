@@ -23,7 +23,7 @@ public class MessageService {
         return (List<Message>) messageRepository.findAll();
     }
 
-    public void deleteMessage(Id messageId){
+    public void deleteMessage(Long messageId){
         System.out.printf("message id to delete------->", messageId);
 
         if(messageId != null){

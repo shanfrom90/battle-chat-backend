@@ -9,6 +9,6 @@ import com.battle.chat.demo.model.Message;
 import jakarta.persistence.Id;
 
 @Repository
-public interface MessageRepository extends CrudRepository<Message, Id> {
+public interface MessageRepository extends CrudRepository<Message, Long> {
 
 }
