@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Id id;
+    private Long id;
 
     @Column(name="user_name")
     private String userName;

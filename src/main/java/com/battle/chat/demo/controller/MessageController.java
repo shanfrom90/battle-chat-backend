@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.battle.chat.demo.model.Message;
 import com.battle.chat.demo.service.MessageService;
 
- 
-
 @RestController
 @RequestMapping("/api/messages")
 public class MessageController {
@@ -24,24 +22,21 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping
-    public ResponseEntity<?> saveMessage(@RequestBody Message message ){
+    public ResponseEntity<?> saveMessage(@RequestBody Message message) {
         messageService.saveMessage(message);
 
         return ResponseEntity.ok().build();
     }
-    
+
     @GetMapping
-    public List<Message> getAllMessages(){
+    public List<Message> getAllMessages() {
         return messageService.getAllMessages();
     }
 
     @DeleteMapping("/{id}")
-    public String deleteMessageById(@PathVariable("id") Long messageId){
-          messageService.deleteMessage(messageId);
-          return "Deleted message with ID:" + messageId;
+    public String deleteMessageById(@PathVariable("id") Long messageId) {
+        messageService.deleteMessage(messageId);
+        return "Deleted message with ID:" + messageId;
     }
 
-    
-
-    
 }
