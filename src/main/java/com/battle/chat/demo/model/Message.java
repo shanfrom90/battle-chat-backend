@@ -25,4 +25,10 @@ public class Message {
 
     @Column(name="text_message")
     private String textMessage;
+
+    @Column(name="sender_name")
+    private String senderName;
+
+    @Column(name="target_name")
+    private String targetName;
 }
