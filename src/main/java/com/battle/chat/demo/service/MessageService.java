@@ -14,8 +14,8 @@ public class MessageService {
     MessageRepository messageRepository;
 
     @SuppressWarnings({ "null" })
-    public void saveMessage(Message message) {
-        messageRepository.save(message);
+    public Message saveMessage(Message message) {
+        return messageRepository.save(message);
     }
 
     public List<Message> getAllMessages() {

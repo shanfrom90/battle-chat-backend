@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.battle.chat.demo.model.Message;
+import com.battle.chat.demo.socketIO.service.SocketIOService;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -20,7 +21,10 @@ public class SocketIOController {
     @Autowired
     private SocketIOServer socketServer; 
 
-    SocketIOController(SocketIOServer socketIOServer){
+    private final SocketIOService socketIOService;
+
+    SocketIOController(SocketIOServer socketIOServer, SocketIOService socketIOService){
+        this.socketIOService = socketIOService;
         this.socketServer = socketIOServer; 
         this.socketServer.addConnectListener(onUserConnectWithSocket);
         this.socketServer.addDisconnectListener(onUserDisconnectWithSocket);
@@ -30,7 +34,7 @@ public class SocketIOController {
     public ConnectListener onUserConnectWithSocket = new ConnectListener() {
         @Override
         public void onConnect(SocketIOClient client){
-            log.info("On connect operation inside controller");
+            log.info("On connect operation inside controller with session id: " + client.getSessionId());
         }
     };
 
@@ -44,9 +48,10 @@ public class SocketIOController {
     public DataListener<Message> onSendMessage = new DataListener<Message>() {
         @Override
         public void onData(SocketIOClient client, Message message, AckRequest acknowledge) throws Exception{
-            log.info(message.getSenderName()+" user sends message to user " + message.getTargetName() + " with the message: " + message.getTextMessage());
-            socketServer.getBroadcastOperations().sendEvent(message.getTargetName(), client, message); 
-            acknowledge.sendAckData("Message sent to target user sucessfully"); 
+            log.info("User: " + message.getUserName()+" sends the following message: " + message.getTextMessage());
+            socketServer.getBroadcastOperations().sendEvent(message.getUserName(), client, message); 
+            socketIOService.saveSocketMessage(client, message);
+            acknowledge.sendAckData("Message sent sucessfully"); 
         }
     };
 }
