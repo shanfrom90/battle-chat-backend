@@ -17,15 +17,15 @@ import lombok.extern.log4j.Log4j2;
 @Component
 @Log4j2
 public class SocketIOController {
-    
+
     @Autowired
-    private SocketIOServer socketServer; 
+    private SocketIOServer socketServer;
 
     private final SocketIOService socketIOService;
 
-    SocketIOController(SocketIOServer socketIOServer, SocketIOService socketIOService){
+    SocketIOController(SocketIOServer socketIOServer, SocketIOService socketIOService) {
         this.socketIOService = socketIOService;
-        this.socketServer = socketIOServer; 
+        this.socketServer = socketIOServer;
         this.socketServer.addConnectListener(onUserConnectWithSocket);
         this.socketServer.addDisconnectListener(onUserDisconnectWithSocket);
         this.socketServer.addEventListener("sendMessage", Message.class, onSendMessage);
@@ -33,25 +33,25 @@ public class SocketIOController {
 
     public ConnectListener onUserConnectWithSocket = new ConnectListener() {
         @Override
-        public void onConnect(SocketIOClient client){
+        public void onConnect(SocketIOClient client) {
             log.info("On connect operation inside controller with session id: " + client.getSessionId());
         }
     };
 
-    public DisconnectListener onUserDisconnectWithSocket = new  DisconnectListener() {
+    public DisconnectListener onUserDisconnectWithSocket = new DisconnectListener() {
         @Override
-        public void onDisconnect(SocketIOClient client){
+        public void onDisconnect(SocketIOClient client) {
             log.info("On disconnect operation inside controller");
         }
     };
 
     public DataListener<Message> onSendMessage = new DataListener<Message>() {
         @Override
-        public void onData(SocketIOClient client, Message message, AckRequest acknowledge) throws Exception{
-            log.info("User: " + message.getUserName()+" sends the following message: " + message.getTextMessage());
-            socketServer.getBroadcastOperations().sendEvent(message.getUserName(), client, message); 
-            socketIOService.saveSocketMessage(client, message);
-            acknowledge.sendAckData("Message sent sucessfully"); 
+        public void onData(SocketIOClient client, Message message, AckRequest acknowledge) throws Exception {
+            log.info("User: " + message.getUserName() + " sends the following message: " + message.getTextMessage());
+            socketServer.getBroadcastOperations().sendEvent(message.getUserName(), client, message);
+            socketIOService.sendSocketMessage(client, message);
+            acknowledge.sendAckData("Message sent sucessfully");
         }
     };
 }
