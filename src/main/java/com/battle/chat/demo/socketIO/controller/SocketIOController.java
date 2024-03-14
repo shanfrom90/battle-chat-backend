@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.battle.chat.demo.model.Message;
+import com.battle.chat.demo.socketIO.service.SocketIOService;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -49,8 +50,8 @@ public class SocketIOController {
         public void onData(SocketIOClient client, Message message, AckRequest acknowledge) throws Exception {
             log.info("User: " + message.getUserName() + " sends the following message: " + message.getTextMessage());
             socketServer.getBroadcastOperations().sendEvent(message.getUserName(), client, message);
-            socketIOService.sendSocketMessage(client, message);
-            acknowledge.sendAckData("Message sent sucessfully");
+            socketIOService.saveSocketMessage(client, message);
+            acknowledge.sendAckData("Message arrived in the API...");
         }
     };
 }

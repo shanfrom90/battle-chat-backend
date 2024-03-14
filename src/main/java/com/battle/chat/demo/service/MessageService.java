@@ -5,25 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battle.chat.demo.model.Message;
-import com.battle.chat.demo.socketIO.service.SocketIOService;
 import com.corundumstudio.socketio.SocketIOClient;
 
 import lombok.RequiredArgsConstructor;
 
 import com.battle.chat.demo.repository.MessageRepository;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class MessageService {
-    private final SocketIOService socketService;
 
     @Autowired
     MessageRepository messageRepository;
  
     @SuppressWarnings({ "null" })
     public Message newMessage(Message message, SocketIOClient senderClient) {
-        socketService.sendSocketMessage(senderClient, message);
+        System.out.println("INSIDE newMessage, MessageService.java: " + senderClient + " sent the following Message: " + message);
         return messageRepository.save(message);
     }
 
