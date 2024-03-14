@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import com.battle.chat.demo.model.Message;
 
 import com.battle.chat.demo.repository.MessageRepository;
-import com.battle.chat.demo.socketIO.service.SocketIOService;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
