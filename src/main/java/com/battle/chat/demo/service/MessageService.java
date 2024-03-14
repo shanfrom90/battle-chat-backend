@@ -5,17 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battle.chat.demo.model.Message;
+import com.corundumstudio.socketio.SocketIOClient;
+
+import lombok.RequiredArgsConstructor;
 
 import com.battle.chat.demo.repository.MessageRepository;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
+
     @Autowired
     MessageRepository messageRepository;
-
+ 
     @SuppressWarnings({ "null" })
-    public void saveMessage(Message message) {
-        messageRepository.save(message);
+    public Message newMessage(Message message, SocketIOClient senderClient) {
+        System.out.println("INSIDE newMessage, MessageService.java: " + senderClient + " sent the following Message: " + message);
+        return messageRepository.save(message);
     }
 
     public List<Message> getAllMessages() {
@@ -23,7 +29,7 @@ public class MessageService {
     }
 
     @SuppressWarnings("null")
-    public void deleteMessage( Long messageId) {
+    public void deleteMessage(Long messageId) {
         messageRepository.deleteById(messageId);
     }
 
