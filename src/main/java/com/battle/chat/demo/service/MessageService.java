@@ -11,6 +11,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import lombok.RequiredArgsConstructor;
 
 import com.battle.chat.demo.repository.MessageRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class MessageService {
 
     @Autowired
     MessageRepository messageRepository;
-
+ 
     @SuppressWarnings({ "null" })
     public Message newMessage(Message message, SocketIOClient senderClient) {
         socketService.sendSocketMessage(senderClient, message);
