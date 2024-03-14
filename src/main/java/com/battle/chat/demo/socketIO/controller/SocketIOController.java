@@ -2,6 +2,7 @@ package com.battle.chat.demo.socketIO.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.battle.chat.demo.model.Message;
 import com.battle.chat.demo.socketIO.service.SocketIOService;
@@ -16,6 +17,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Component
 @Log4j2
+@CrossOrigin(origins = "http://localhost:4200")
 public class SocketIOController {
 
     @Autowired
@@ -44,7 +46,7 @@ public class SocketIOController {
             log.info("On disconnect operation inside controller");
         }
     };
-
+    
     public DataListener<Message> onSendMessage = new DataListener<Message>() {
         @Override
         public void onData(SocketIOClient client, Message message, AckRequest acknowledge) throws Exception {

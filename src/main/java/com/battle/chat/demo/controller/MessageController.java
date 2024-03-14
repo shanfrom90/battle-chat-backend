@@ -23,7 +23,7 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    
     @PostMapping
     public ResponseEntity<?> newMessage(@RequestBody Message message, SocketIOClient socketClient) {
         messageService.newMessage(message, socketClient);
@@ -31,7 +31,7 @@ public class MessageController {
         return ResponseEntity.ok().build();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+  
     @GetMapping
     public List<Message> getAllMessages() {
         return messageService.getAllMessages();
