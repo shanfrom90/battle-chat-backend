@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 import com.battle.chat.demo.model.Message;
 
 import com.battle.chat.demo.repository.MessageRepository;
+import com.battle.chat.demo.socketIO.service.SocketIOService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
     @Autowired
     MessageRepository messageRepository;
-
+ 
     @SuppressWarnings({ "null" })
     public Message saveMessage(Message message) {
         return messageRepository.save(message);
