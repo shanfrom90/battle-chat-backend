@@ -6,21 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
 @Entity
 @Table
 @Data
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +25,10 @@ public class Message {
 
     @Column(name="text_message")
     private String textMessage;
- 
+
+    @Column(name="sender_name")
+    private String senderName;
+
+    @Column(name="target_name")
+    private String targetName;
 }
